@@ -76,7 +76,6 @@ def userIndex(current):
     if num <= maxp:
         for lst in range((num-1)*10, min((num-1)*10 + 10, len(dict_Artcles))):            
             currentdata.append(dict_Artcles.items()[lst][1]);   
-        print currentdata 
         return render_template('articlelist_base.html',Sindex = Sindex, current = num,Eindex = Eindex,PP = prepage, NP = nextpage, Content = currentdata)
 
 def GetRange(dtlist, start, len):
