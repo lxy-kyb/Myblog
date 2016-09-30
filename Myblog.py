@@ -6,13 +6,13 @@ import os
 import codecs
 import shelve
 
-app = Flask(__name__, static_url_path='')
+app = Flask(__name__)
 
 @app.route('/')
 def user():
     return render_template('base.html')
 
-@app.route('/pages/Articles/<page>')
+@app.route('/Articles/<page>')
 def Articles(page):
     print page, app.static_url_path
     return send_from_directory('Articles', page)
@@ -84,14 +84,17 @@ def GetRange(dtlist, start, len):
     for i in range(start, start + len):
         newlist.append(dtlist[i])
 
-global maxp
-INDEX_DAT = 'index.dat'
-if __name__ == '__main__':
+def Init():
     global dict_Artcles
-    dat = shelve.open(INDEX_DAT)
-    dict_Artcles = dat['dict_Artcles']
-    global maxp
+    with codecs.open('index.json') as file:
+        jsonCode = file.read()    
+    dict_Artcles = json.loads(jsonCode)
+    global maxp 
     global maxcap
     maxp = len(dict_Artcles)/10 + 1
     maxcap = 17
+
+INDEX_DAT = 'index.dat'
+if __name__ == '__main__':
+    Init()
     app.run(debug=True)

@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>0fdf17bf-2f63-403f-8e39-876be7509598</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Myblog.py</StartupFile>
+    <StartupFile>generate.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>

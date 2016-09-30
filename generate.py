@@ -1,9 +1,9 @@
 # -*- coding:utf-8 -*-
 import os
-import shelve
 from jinja2 import Environment, FileSystemLoader
 import codecs
 import shutil
+import json
 from markdown import Markdown
 from datetime import datetime
 
@@ -47,7 +47,7 @@ def gen_md_html():
     global dict_Articles
     for article in Index_Articles:
        html = render_html(article)
-       save_html(dict_Articles[article['index']].get('url'), html)
+       save_html(dict_Articles[article['index']].get('savepth'), html)
 
 def render_html(file):
     with codecs.open(file['filepath'], 'r', 'utf-8') as mdfile:
@@ -91,7 +91,8 @@ def create_index(file, meta):
         'datetime' : publish_date,
         'summary' : summary,
         'filepath' : file['filepath'],
-        'url': str.format('Articles/{0}.html',file['index']),
+        'url': str.format('/Articles/{0}.html',file['index']),
+        'savepth' : str.format('Articles/{0}.html',file['index']),
         "tags": meta.get("tags", [])
         }
  
@@ -100,15 +101,20 @@ def parse_time(timestamp, pattern="%Y-%m-%d %H:%M:%S"):
 
 def save_html(out_path, html):
     base_folder = os.path.dirname(out_path)
-    if not os.path.exists(base_folder):
+    if not os.path.exists(base_folder) and base_folder != "":
         os.makedirs(base_folder)
     with codecs.open(out_path, "w+", "utf-8") as f:
         f.write(html)
 
 def dump_index():
-    dat = shelve.open(Index_DAT)
-    dat['dict_Artcles'] = dict_Articles
-    dat.close()
+    jsoncode = json.dumps(dict_Articles);
+    with codecs.open('index.json', 'w+') as f:
+        f.write(jsoncode)    
+
+def gen_html_index():
+    template = env.get_template("base.html")
+    html = template.render()
+    save_html('index.html',html)    
 
 if __name__ == '__main__':
     clean()

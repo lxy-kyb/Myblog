@@ -1,1 +1,1 @@
-python blog.py
+python Myblog.py
