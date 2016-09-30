@@ -153,7 +153,7 @@ def create_index(file, meta):
         'datetime' : publish_date,
         'summary' : summary,
         'filepath' : file['filepath'],
-        'url': str.format('/Articles/{0}.html',file['index']),
+        'url': str.format('Articles/{0}.html',file['index']),
         'savepth' : str.format('Articles/{0}.html',file['index']),
         "tags": meta.get("tags", [])
         }
