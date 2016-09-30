@@ -49,7 +49,7 @@ def gen_md_html():
     global dict_Articles
     for article in Index_Articles:
        html = render_html(article)
-       save_html(dict_Articles[article['index']].get('savepth'), html)
+       save_html(dict_Articles[article['index']].get('url'), html)
 
 def render_pages_html(num):
     global maxp, maxcap
@@ -153,8 +153,7 @@ def create_index(file, meta):
         'datetime' : publish_date,
         'summary' : summary,
         'filepath' : file['filepath'],
-        'url': str.format('/Articles/{0}.html',file['index']),
-        'savepth' : str.format('Articles/{0}.html',file['index']),
+        'url': str.format('Articles/{0}.html',file['index']),
         "tags": meta.get("tags", [])
         }
  
