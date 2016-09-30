@@ -56,7 +56,7 @@ def render_pages_html(num):
     global dict_Articles
     Sindex = [];
     Eindex = [];
-    urlstr = '/pages/{0}.html'
+    urlstr = 'Pages/{0}.html'
     if maxp <= 17:    
         for i in range(1,num):
             url = str.format(urlstr,i)
@@ -153,7 +153,7 @@ def create_index(file, meta):
         'datetime' : publish_date,
         'summary' : summary,
         'filepath' : file['filepath'],
-        'url': str.format('Articles/{0}.html',file['index']),
+        'url': str.format('/Articles/{0}.html',file['index']),
         'savepth' : str.format('Articles/{0}.html',file['index']),
         "tags": meta.get("tags", [])
         }
